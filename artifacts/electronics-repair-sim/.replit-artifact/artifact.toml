@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "Electronics Academy Repair Simulator"
+description = "An interactive electronics-repair training game with Academy lessons, repair missions, a component library, circuit diagnosis, multimeter measurements, and a 3D workshop."
+version = "1.0.0"
+id = "artifacts/electronics-repair-sim"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 23476
+
+[services.development]
+run = "pnpm --filter @workspace/electronics-repair-sim run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/electronics-repair-sim", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/electronics-repair-sim/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "23476"
+BASE_PATH = "/"

@@ -1,0 +1,1 @@
+- [3D preview limitation](webgl-preview-limitation.md) — Screenshot browser lacks WebGL here; verify the app's non-WebGL fallback as well as the GPU scene on supported clients.

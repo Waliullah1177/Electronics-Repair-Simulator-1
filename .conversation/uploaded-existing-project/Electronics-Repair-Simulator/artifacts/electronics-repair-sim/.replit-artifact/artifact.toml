@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "Electronics Circuit Repair Simulator"
+description = "A hands-on electronics repair training game with interactive PCB diagnosis, multimeter measurements, component replacement, lessons, missions, and a realistic 3D workshop."
+version = "1.0.0"
+id = "artifacts/electronics-repair-sim"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 23476
+
+[services.development]
+run = "pnpm --filter @workspace/electronics-repair-sim run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/electronics-repair-sim", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/electronics-repair-sim/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "23476"
+BASE_PATH = "/"
